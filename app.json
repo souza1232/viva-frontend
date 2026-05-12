@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "Viva",
+    "slug": "viva-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android", "web"],
+    "plugins": ["expo-asset"],
+    "android": {
+      "package": "com.viva.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FDF6F8"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "name": "Viva — Sua saúde na menopausa",
+      "shortName": "Viva",
+      "lang": "pt-BR",
+      "themeColor": "#C96A8A",
+      "backgroundColor": "#FDF6F8",
+      "description": "Apoio personalizado para mulheres na menopausa."
+    }
+  }
+}
