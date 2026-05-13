@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert,
-  Linking, Platform,
+  Linking, Platform, Animated,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 // expo-print e expo-sharing só funcionam em native (iOS/Android)
@@ -29,10 +29,38 @@ function MenuRow({ emoji, label, onPress, danger }) {
   );
 }
 
+function InAppAlert({ message, onDismiss }) {
+  const opacity = React.useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.sequence([
+      Animated.timing(opacity, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.delay(3000),
+      Animated.timing(opacity, { toValue: 0, duration: 300, useNativeDriver: true }),
+    ]).start(() => onDismiss());
+  }, []);
+
+  return (
+    <Animated.View style={[styles.inAppAlert, { opacity }]}>
+      <Text style={styles.inAppAlertTitle}>{message.title}</Text>
+      <Text style={styles.inAppAlertText}>{message.body}</Text>
+    </Animated.View>
+  );
+}
+
 export default function ProfileScreen() {
   const { user, logout } = useAuthStore();
   const [loadingCheckout, setLoadingCheckout] = useState(false);
   const [generatingPDF, setGeneratingPDF] = useState(false);
+  const [alertMsg, setAlertMsg] = useState(null);
+
+  function showInfo(title, body) {
+    if (Platform.OS !== 'web') {
+      Alert.alert(title, body);
+    } else {
+      setAlertMsg({ title, body });
+    }
+  }
   const sub = user?.subscription;
   const statusInfo = STATUS_LABELS[sub?.status || 'none'];
 
@@ -208,7 +236,7 @@ ${checkins.some(c => c.notes) ? `<h2>Observações</h2>${checkins.filter(c => c.
               disabled={loadingCheckout}
             >
               <Text style={styles.subscribeBtnText}>
-                {loadingCheckout ? 'Aguarde...' : 'Assinar por R$69/mês'}
+                {loadingCheckout ? 'Aguarde...' : 'Assinar por R$37,90/mês'}
               </Text>
             </TouchableOpacity>
           )}
@@ -250,15 +278,19 @@ ${checkins.some(c => c.notes) ? `<h2>Observações</h2>${checkins.filter(c => c.
 
         {/* Menu */}
         <View style={styles.menuCard}>
-          <MenuRow emoji="🔔" label="Notificações" onPress={() => Alert.alert('Ativas! 🔔', 'Você receberá lembretes às 9h e 21h todos os dias.')} />
-          <MenuRow emoji="🔒" label="Privacidade" onPress={() => Alert.alert('Privacidade', 'Seus dados são 100% privados e nunca compartilhados.')} />
-          <MenuRow emoji="💬" label="Suporte" onPress={() => Linking.openURL('mailto:suporte@viva.app')} />
-          <MenuRow emoji="⭐" label="Avaliar o app" onPress={() => Alert.alert('Obrigada!', 'Sua avaliação nos ajuda a melhorar.')} />
+          <MenuRow emoji="🔔" label="Notificações" onPress={() => showInfo('Notificações ativas 🔔', 'Você receberá lembretes às 9h e 21h todos os dias.')} />
+          <MenuRow emoji="🔒" label="Privacidade" onPress={() => showInfo('Privacidade', 'Seus dados são 100% privados e nunca compartilhados com terceiros.')} />
+          <MenuRow emoji="💬" label="Suporte" onPress={() => Linking.openURL('mailto:suporte@appviva.com.br')} />
+          <MenuRow emoji="⭐" label="Avaliar o app" onPress={() => showInfo('Obrigada! ⭐', 'Sua avaliação nos ajuda a melhorar cada vez mais.')} />
           <MenuRow emoji="🚪" label="Sair da conta" onPress={handleLogout} danger />
         </View>
 
         <Text style={styles.version}>Viva v1.0.0 • Feito com 💕 para você</Text>
       </ScrollView>
+
+      {alertMsg && (
+        <InAppAlert message={alertMsg} onDismiss={() => setAlertMsg(null)} />
+      )}
     </View>
   );
 }
@@ -298,4 +330,16 @@ const styles = StyleSheet.create({
   pdfBtnInfo: { flex: 1 },
   pdfBtnTitle: { fontSize: 15, fontWeight: '700', color: COLORS.text },
   pdfBtnSub: { fontSize: 12, color: COLORS.textSecondary, marginTop: 2 },
+  inAppAlert: {
+    position: 'absolute',
+    bottom: 80,
+    left: 16,
+    right: 16,
+    backgroundColor: '#3D2645',
+    borderRadius: RADIUS.lg,
+    padding: SPACING.md,
+    ...SHADOW.sm,
+  },
+  inAppAlertTitle: { color: '#fff', fontWeight: '700', fontSize: 15, marginBottom: 4 },
+  inAppAlertText: { color: 'rgba(255,255,255,0.85)', fontSize: 13 },
 });
