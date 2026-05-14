@@ -2,6 +2,9 @@
   "buildCommand": "chmod +x node_modules/.bin/expo && npx expo export --platform web && cp -r public/. dist/",
   "outputDirectory": "dist",
   "framework": null,
+  "redirects": [
+    { "source": "/", "destination": "/inicio", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
