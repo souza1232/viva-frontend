@@ -15,12 +15,13 @@
     "web": {
       "bundler": "metro",
       "output": "single",
-      "name": "Viva — Sua saúde na menopausa",
+      "favicon": "./assets/favicon.svg",
+      "name": "Viva — Saúde e Bem-estar na Menopausa",
       "shortName": "Viva",
       "lang": "pt-BR",
       "themeColor": "#C96A8A",
       "backgroundColor": "#FDF6F8",
-      "description": "Apoio personalizado para mulheres na menopausa."
+      "description": "Viva é o app de saúde para mulheres na menopausa. IA personalizada, controle de sintomas, cardápio anti-inflamatório e comunidade de apoio. Experimente grátis."
     },
     "extra": {
       "eas": {
