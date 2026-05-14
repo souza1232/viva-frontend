@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viva — Sua saúde na menopausa com IA</title>
+  <meta name="description" content="Viva é o app de saúde para mulheres na menopausa. IA personalizada, controle de sintomas, cardápio anti-inflamatório e comunidade de apoio. Experimente 7 dias grátis.">
+  <meta name="keywords" content="menopausa, saúde feminina, app menopausa, sintomas menopausa, fogacho, suor noturno, IA saúde, bem-estar menopausa">
+  <meta property="og:title" content="Viva — Sua saúde na menopausa com IA">
+  <meta property="og:description" content="Apoio personalizado com inteligência artificial para mulheres na menopausa. Controle sintomas, melhore sua alimentação e conecte-se com outras mulheres.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://appviva.com.br">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FDF6F8; color: #333; }
+    a { text-decoration: none; }
+
+    /* NAV */
+    nav { background: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F5E6EF; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 22px; font-weight: 900; color: #C96A8A; }
+    .nav-btn { background: #C96A8A; color: white; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 14px; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #C96A8A, #7B6EA8); padding: 72px 24px 80px; text-align: center; }
+    .hero-emoji { font-size: 64px; display: block; margin-bottom: 8px; }
+    .hero h1 { font-size: 32px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 16px; }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.88); line-height: 1.6; max-width: 560px; margin: 0 auto 32px; }
+    .hero-cta { display: inline-block; background: white; color: #C96A8A; padding: 16px 36px; border-radius: 50px; font-size: 17px; font-weight: 800; margin-bottom: 16px; }
+    .hero-login { display: block; color: rgba(255,255,255,0.8); font-size: 15px; margin-top: 8px; }
+    .hero-login span { font-weight: 700; color: white; }
+
+    /* BADGE */
+    .badge { background: #FFF0F5; text-align: center; padding: 14px; font-size: 14px; color: #C96A8A; font-weight: 600; }
+
+    /* FEATURES */
+    .section { padding: 60px 24px; max-width: 800px; margin: 0 auto; }
+    .section-title { font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 40px; color: #333; }
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .features { grid-template-columns: 1fr; } .hero h1 { font-size: 26px; } }
+    .feature-card { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 2px 12px rgba(201,106,138,0.08); }
+    .feature-emoji { font-size: 36px; margin-bottom: 12px; display: block; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #333; }
+    .feature-card p { font-size: 14px; color: #777; line-height: 1.6; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: #FFF0F5; padding: 60px 24px; }
+    .testimonials-inner { max-width: 800px; margin: 0 auto; }
+    .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonial-card { background: white; border-radius: 16px; padding: 24px; border-left: 4px solid #C96A8A; }
+    .testimonial-text { font-size: 14px; color: #555; line-height: 1.7; font-style: italic; margin-bottom: 12px; }
+    .testimonial-name { font-size: 13px; font-weight: 700; color: #C96A8A; }
+
+    /* PRICING */
+    .pricing { padding: 60px 24px; max-width: 480px; margin: 0 auto; text-align: center; }
+    .price-card { background: white; border-radius: 24px; padding: 40px 32px; box-shadow: 0 4px 24px rgba(201,106,138,0.12); }
+    .trial-badge { background: #FFF0F5; color: #C96A8A; padding: 8px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; display: inline-block; margin-bottom: 20px; }
+    .price-value { font-size: 52px; font-weight: 900; color: #C96A8A; }
+    .price-mes { font-size: 20px; font-weight: 400; color: #999; }
+    .price-desc { font-size: 14px; color: #999; margin: 8px 0 24px; }
+    .price-features { text-align: left; margin-bottom: 28px; }
+    .price-feature { font-size: 15px; color: #444; margin-bottom: 10px; }
+    .cta-btn { display: block; background: linear-gradient(135deg, #C96A8A, #7B6EA8); color: white; padding: 18px; border-radius: 50px; font-size: 17px; font-weight: 800; }
+
+    /* FOOTER */
+    footer { background: #3D2C35; padding: 40px 24px; text-align: center; }
+    .footer-logo { font-size: 24px; font-weight: 900; color: white; margin-bottom: 12px; }
+    .footer-link { color: #C96A8A; font-size: 14px; display: block; margin-bottom: 8px; }
+    .footer-copy { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">🌸 Viva</span>
+    <a href="/entrar" class="nav-btn">Entrar</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-emoji">🌸</span>
+    <h1>Sua saúde na menopausa com inteligência artificial</h1>
+    <p>Apoio personalizado para controlar sintomas, melhorar sua alimentação e se sentir melhor todos os dias.</p>
+    <a href="/entrar" class="hero-cta">Começar 7 dias grátis →</a>
+    <a href="/entrar" class="hero-login">Já tenho conta. <span>Entrar</span></a>
+  </section>
+
+  <!-- BADGE -->
+  <div class="badge">✨ Milhares de mulheres já transformaram sua menopausa com o Viva</div>
+
+  <!-- FEATURES -->
+  <div class="section">
+    <h2 class="section-title">Tudo que você precisa em um só lugar</h2>
+    <div class="features">
+      <div class="feature-card">
+        <span class="feature-emoji">🤖</span>
+        <h3>IA personalizada 24h</h3>
+        <p>Chat que entende seus sintomas e responde com base na sua fase da menopausa, com linguagem simples e acolhedora.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-emoji">📊</span>
+        <h3>Controle de sintomas</h3>
+        <p>Registre fogachos, insônia, mudanças de humor e acompanhe sua evolução com gráficos claros.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-emoji">🥗</span>
+        <h3>Cardápio anti-inflamatório</h3>
+        <p>Receitas e dicas de alimentação criadas especificamente para aliviar os sintomas da menopausa.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-emoji">💆</span>
+        <h3>Rituais de bem-estar</h3>
+        <p>Rotinas diárias de autocuidado para dormir melhor, reduzir a ansiedade e melhorar sua energia.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <div class="testimonials-inner">
+      <h2 class="section-title">O que dizem nossas usuárias</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Finalmente encontrei um app que me entende. O chat da IA é incrível, responde tudo que eu precisava saber sobre meus sintomas."</p>
+          <span class="testimonial-name">— Ana Paula, 52 anos</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Os fogachos reduziram muito depois que comecei a seguir o cardápio do Viva. Recomendo para todas as mulheres nessa fase!"</p>
+          <span class="testimonial-name">— Márcia S., 49 anos</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Me sinto menos sozinha. A comunidade do Viva é um espaço seguro para falar sobre o que ninguém costuma falar."</p>
+          <span class="testimonial-name">— Rosana F., 54 anos</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Dormi muito melhor depois dos rituais noturnos que o app sugeriu. Valeu cada centavo do investimento."</p>
+          <span class="testimonial-name">— Claudia M., 51 anos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="pricing">
+    <h2 class="section-title">Simples e acessível</h2>
+    <div class="price-card">
+      <span class="trial-badge">🎉 7 dias grátis</span>
+      <div class="price-value">R$37,90<span class="price-mes">/mês</span></div>
+      <p class="price-desc">Cancele quando quiser. Sem pegadinhas.</p>
+      <div class="price-features">
+        <div class="price-feature">✅ Chat com IA ilimitado</div>
+        <div class="price-feature">✅ Cardápio personalizado</div>
+        <div class="price-feature">✅ Controle de sintomas</div>
+        <div class="price-feature">✅ Rituais de bem-estar</div>
+        <div class="price-feature">✅ Comunidade exclusiva</div>
+      </div>
+      <a href="/entrar" class="cta-btn">Experimentar grátis agora</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🌸 Viva</div>
+    <a href="mailto:suporte@appviva.com.br" class="footer-link">suporte@appviva.com.br</a>
+    <p class="footer-copy">© 2025 Viva App. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
