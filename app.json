@@ -15,7 +15,6 @@
     "web": {
       "bundler": "metro",
       "output": "single",
-      "favicon": "./assets/favicon.svg",
       "name": "Viva — Saúde e Bem-estar na Menopausa",
       "shortName": "Viva",
       "lang": "pt-BR",
