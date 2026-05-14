@@ -1,5 +1,5 @@
 {
-  "buildCommand": "chmod +x node_modules/.bin/expo && npx expo export --platform web",
+  "buildCommand": "chmod +x node_modules/.bin/expo && npx expo export --platform web && cp -r public/. dist/",
   "outputDirectory": "dist",
   "framework": null,
   "rewrites": [
