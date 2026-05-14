@@ -7,10 +7,12 @@ import { ActivityIndicator, View } from 'react-native';
 
 import useAuthStore from '../store/useAuthStore';
 import { COLORS } from '../theme';
+import { Platform } from 'react-native';
 
 // Telas
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import LandingScreen from '../screens/LandingScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ChatScreen from '../screens/ChatScreen';
@@ -76,6 +78,9 @@ export default function AppNavigator() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!isAuthenticated ? (
           <>
+            {Platform.OS === 'web' && (
+              <Stack.Screen name="Landing" component={LandingScreen} />
+            )}
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
           </>
