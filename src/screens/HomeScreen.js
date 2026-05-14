@@ -179,6 +179,7 @@ export default function HomeScreen({ navigation }) {
   const hour = new Date().getHours();
   const timeGreeting = hour < 12 ? 'Bom dia' : hour < 18 ? 'Boa tarde' : 'Boa noite';
   const isBusinesswoman = user?.mainRole === 'empresaria' || user?.mainRole === 'todas';
+  const isHomemaker = user?.mainRole === 'esposa' || user?.mainRole === 'mae';
 
   useEffect(() => {
     loadGreeting();
@@ -468,6 +469,24 @@ export default function HomeScreen({ navigation }) {
           </View>
         )}
 
+        {/* Card empreendedorismo — para esposa/mae */}
+        {isHomemaker && (
+          <TouchableOpacity
+            style={styles.reinventionCard}
+            onPress={() => isPremium
+              ? navigation.navigate('Chat', { initialMessage: 'Quero pensar em formas de empreender ou criar uma nova fonte de renda nessa fase da minha vida. Me ajuda a descobrir minhas habilidades e possibilidades?' })
+              : goToPaywall()
+            }
+            activeOpacity={0.88}
+          >
+            <Text style={styles.reinventionEmoji}>🌱</Text>
+            <View style={styles.reinventionInfo}>
+              <Text style={styles.reinventionTitle}>Sua próxima fase</Text>
+              <Text style={styles.reinventionSub}>A menopausa pode ser o começo de algo novo. Que tal descobrir seu potencial de empreender? →</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+
         {/* Suporte noturno — PREMIUM */}
         <View style={{ position: 'relative', marginBottom: SPACING.lg }}>
           <View style={[styles.nightCard, !isPremium && { opacity: 0.5 }]}>
@@ -600,6 +619,12 @@ const styles = StyleSheet.create({
   proBannerTitle: { fontSize: 15, fontWeight: '800', color: '#FFFFFF' },
   proBannerSub: { fontSize: 12, color: 'rgba(255,255,255,0.75)', marginTop: 2 },
   proBannerArrow: { fontSize: 20, color: '#FFFFFF', fontWeight: '700' },
+
+  reinventionCard: { backgroundColor: '#F0FFF4', borderRadius: RADIUS.lg, padding: SPACING.md, flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: SPACING.md, borderWidth: 1.5, borderColor: '#A5D6A7' },
+  reinventionEmoji: { fontSize: 32 },
+  reinventionInfo: { flex: 1 },
+  reinventionTitle: { fontSize: 15, fontWeight: '800', color: '#1B5E20' },
+  reinventionSub: { fontSize: 13, color: '#388E3C', marginTop: 3, lineHeight: 19 },
 
   remindersCard: { backgroundColor: '#FFF8E7', borderRadius: RADIUS.lg, padding: SPACING.lg },
   remindersTitle: { fontSize: 15, fontWeight: '700', color: COLORS.text, marginBottom: SPACING.sm },
