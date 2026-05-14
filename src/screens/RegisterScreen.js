@@ -10,13 +10,18 @@ import { COLORS, SPACING, RADIUS } from '../theme';
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { register } = useAuthStore();
 
   async function handleRegister() {
-    if (!name.trim() || !email.trim() || !password) {
+    if (!name.trim() || !email.trim() || !phone.trim() || !password) {
       Alert.alert('Atenção', 'Preencha todos os campos.');
+      return;
+    }
+    if (phone.replace(/\D/g, '').length < 10) {
+      Alert.alert('Atenção', 'Digite um telefone válido com DDD.');
       return;
     }
     if (password.length < 8) {
@@ -25,7 +30,7 @@ export default function RegisterScreen({ navigation }) {
     }
     setLoading(true);
     try {
-      await register({ name: name.trim(), email: email.trim().toLowerCase(), password });
+      await register({ name: name.trim(), email: email.trim().toLowerCase(), phone: phone.trim(), password });
     } catch (err) {
       const msg = err.response?.data?.error || 'Erro ao criar conta. Tente novamente.';
       Alert.alert('Ops!', msg);
@@ -68,6 +73,15 @@ export default function RegisterScreen({ navigation }) {
 
             <TextInput
               style={styles.input}
+              placeholder="WhatsApp com DDD (ex: 11 99999-9999)"
+              placeholderTextColor={COLORS.textLight}
+              value={phone}
+              onChangeText={setPhone}
+              keyboardType="phone-pad"
+            />
+
+            <TextInput
+              style={styles.input}
               placeholder="Senha (mínimo 8 caracteres)"
               placeholderTextColor={COLORS.textLight}
               value={password}
@@ -76,7 +90,7 @@ export default function RegisterScreen({ navigation }) {
             />
 
             <View style={styles.trialBanner}>
-              <Text style={styles.trialText}>🎉 7 dias grátis • R$69/mês • Cancele quando quiser</Text>
+              <Text style={styles.trialText}>🎉 Experimente grátis • R$37,90/mês • Cancele quando quiser</Text>
             </View>
 
             <TouchableOpacity

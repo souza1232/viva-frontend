@@ -66,7 +66,7 @@ export default function PaywallScreen({ navigation }) {
           <View style={styles.pricingHeader}>
             <Text style={styles.trialBadge}>7 DIAS GRÁTIS</Text>
           </View>
-          <Text style={styles.price}>R$49,90</Text>
+          <Text style={styles.price}>R$37,90</Text>
           <Text style={styles.pricePeriod}>por mês, após o período gratuito</Text>
           <Text style={styles.pricingDetail}>Cancele quando quiser. Sem surpresas.</Text>
         </View>
