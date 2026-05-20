@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { register } from '../../lib/api'
+import { register, createCheckout } from '../../lib/api'
 import { useAuth } from '../../lib/auth'
 
 export default function RegisterPage() {
@@ -25,7 +25,8 @@ export default function RegisterPage() {
     try {
       const { data } = await register(name.trim(), email.trim().toLowerCase(), password)
       saveAuth(data.token, data.user)
-      router.push('/onboarding')
+      const { data: checkout } = await createCheckout()
+      window.location.href = checkout.url
     } catch (err) {
       setError(err.response?.data?.error || 'Erro ao criar conta. Tente novamente.')
     } finally {
@@ -81,7 +82,7 @@ export default function RegisterPage() {
               disabled={loading}
               className="w-full bg-primary text-white font-bold py-3 rounded-full hover:bg-primary-dark transition disabled:opacity-60"
             >
-              {loading ? 'Criando conta...' : 'Começar grátis por 7 dias →'}
+              {loading ? 'Aguarde...' : 'Criar conta e assinar →'}
             </button>
           </form>
 
