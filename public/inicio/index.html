@@ -3,168 +3,837 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viva — Sua saúde na menopausa com IA</title>
-  <meta name="description" content="Viva é o app de saúde para mulheres na menopausa. IA personalizada, controle de sintomas, cardápio anti-inflamatório e comunidade de apoio. Experimente 7 dias grátis.">
-  <meta name="keywords" content="menopausa, saúde feminina, app menopausa, sintomas menopausa, fogacho, suor noturno, IA saúde, bem-estar menopausa">
-  <meta property="og:title" content="Viva — Sua saúde na menopausa com IA">
-  <meta property="og:description" content="Apoio personalizado com inteligência artificial para mulheres na menopausa. Controle sintomas, melhore sua alimentação e conecte-se com outras mulheres.">
-  <meta property="og:type" content="website">
+  <title>Viva — Saúde feminina com inteligência artificial</title>
+  <meta name="description" content="A primeira IA criada para mulheres na menopausa. Apoio personalizado, 24 horas por dia. Experimente 7 dias grátis.">
+  <meta property="og:title" content="Viva — Saúde feminina com IA">
+  <meta property="og:description" content="A primeira IA criada para mulheres na menopausa. Apoio personalizado, 24 horas por dia.">
   <meta property="og:url" content="https://appviva.com.br">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FDF6F8; color: #333; }
-    a { text-decoration: none; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark: #0D0608;
+      --dark-2: #1A0E12;
+      --dark-3: #261520;
+      --gold: #C8906A;
+      --gold-light: #E8C4A8;
+      --cream: #F5EDE5;
+      --cream-2: #FDF8F4;
+      --text: #F0E6DE;
+      --text-muted: #9A7E74;
+      --border: rgba(200,144,106,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
 
     /* NAV */
-    nav { background: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F5E6EF; position: sticky; top: 0; z-index: 100; }
-    .nav-logo { font-size: 22px; font-weight: 900; color: #C96A8A; }
-    .nav-btn { background: #C96A8A; color: white; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 14px; }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(13,6,8,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--dark);
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
 
     /* HERO */
-    .hero { background: linear-gradient(135deg, #C96A8A, #7B6EA8); padding: 72px 24px 80px; text-align: center; }
-    .hero-emoji { font-size: 64px; display: block; margin-bottom: 8px; }
-    .hero h1 { font-size: 32px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 16px; }
-    .hero p { font-size: 17px; color: rgba(255,255,255,0.88); line-height: 1.6; max-width: 560px; margin: 0 auto 32px; }
-    .hero-cta { display: inline-block; background: white; color: #C96A8A; padding: 16px 36px; border-radius: 50px; font-size: 17px; font-weight: 800; margin-bottom: 16px; }
-    .hero-login { display: block; color: rgba(255,255,255,0.8); font-size: 15px; margin-top: 8px; }
-    .hero-login span { font-weight: 700; color: white; }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
 
-    /* BADGE */
-    .badge { background: #FFF0F5; text-align: center; padding: 14px; font-size: 14px; color: #C96A8A; font-weight: 600; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(200,144,106,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      color: var(--gold-light);
+      font-weight: 500;
+      margin-bottom: 40px;
+      background: rgba(200,144,106,0.06);
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--cream);
+      max-width: 800px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 18px 40px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: all 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary svg {
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(3px);
+    }
+
+    .hero-note {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .hero-note span {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* LOGOS / SOCIAL PROOF */
+    .proof-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .proof-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    /* PROBLEM SECTION */
+    .problem {
+      padding: 100px 24px;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .problem h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .problem p {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* SYMPTOMS */
+    .symptoms {
+      padding: 0 24px 100px;
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .symptom-tag {
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+      background: var(--dark-2);
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .symptom-tag:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(200,144,106,0.06);
+    }
 
     /* FEATURES */
-    .section { padding: 60px 24px; max-width: 800px; margin: 0 auto; }
-    .section-title { font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 40px; color: #333; }
-    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 600px) { .features { grid-template-columns: 1fr; } .hero h1 { font-size: 26px; } }
-    .feature-card { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 2px 12px rgba(201,106,138,0.08); }
-    .feature-emoji { font-size: 36px; margin-bottom: 12px; display: block; }
-    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #333; }
-    .feature-card p { font-size: 14px; color: #777; line-height: 1.6; }
+    .features-section {
+      background: var(--dark-2);
+      padding: 100px 24px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .features-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .features-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .feature-item {
+      background: var(--dark-2);
+      padding: 40px;
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover { background: var(--dark-3); }
+
+    .feature-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .feature-item p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
 
     /* TESTIMONIALS */
-    .testimonials { background: #FFF0F5; padding: 60px 24px; }
-    .testimonials-inner { max-width: 800px; margin: 0 auto; }
-    .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 600px) { .testimonials-grid { grid-template-columns: 1fr; } }
-    .testimonial-card { background: white; border-radius: 16px; padding: 24px; border-left: 4px solid #C96A8A; }
-    .testimonial-text { font-size: 14px; color: #555; line-height: 1.7; font-style: italic; margin-bottom: 12px; }
-    .testimonial-name { font-size: 13px; font-weight: 700; color: #C96A8A; }
+    .testimonials-section {
+      padding: 100px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .testimonials-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--dark-3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      flex-shrink: 0;
+    }
+
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    .testimonial-age {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
 
     /* PRICING */
-    .pricing { padding: 60px 24px; max-width: 480px; margin: 0 auto; text-align: center; }
-    .price-card { background: white; border-radius: 24px; padding: 40px 32px; box-shadow: 0 4px 24px rgba(201,106,138,0.12); }
-    .trial-badge { background: #FFF0F5; color: #C96A8A; padding: 8px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; display: inline-block; margin-bottom: 20px; }
-    .price-value { font-size: 52px; font-weight: 900; color: #C96A8A; }
-    .price-mes { font-size: 20px; font-weight: 400; color: #999; }
-    .price-desc { font-size: 14px; color: #999; margin: 8px 0 24px; }
-    .price-features { text-align: left; margin-bottom: 28px; }
-    .price-feature { font-size: 15px; color: #444; margin-bottom: 10px; }
-    .cta-btn { display: block; background: linear-gradient(135deg, #C96A8A, #7B6EA8); color: white; padding: 18px; border-radius: 50px; font-size: 17px; font-weight: 800; }
+    .pricing-section {
+      padding: 100px 24px;
+      background: var(--dark-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pricing-inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 48px;
+    }
+
+    .price-card {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .price-trial {
+      display: inline-block;
+      background: rgba(200,144,106,0.12);
+      border: 1px solid rgba(200,144,106,0.3);
+      color: var(--gold-light);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .price-period {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-left: 4px;
+    }
+
+    .price-cancel {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 12px 0 36px;
+    }
+
+    .price-list {
+      text-align: left;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .price-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .price-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(200,144,106,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 11px;
+    }
+
+    .btn-checkout {
+      display: block;
+      width: 100%;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 18px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .btn-checkout:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 120px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(200,144,106,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--cream);
+      max-width: 600px;
+      margin: 0 auto 20px;
+      line-height: 1.15;
+    }
+
+    .cta-section h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
 
     /* FOOTER */
-    footer { background: #3D2C35; padding: 40px 24px; text-align: center; }
-    .footer-logo { font-size: 24px; font-weight: 900; color: white; margin-bottom: 12px; }
-    .footer-link { color: #C96A8A; font-size: 14px; display: block; margin-bottom: 8px; }
-    .footer-copy { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 16px; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .nav-right { gap: 12px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .feature-item { padding: 28px; }
+      .price-card { padding: 36px 24px; }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
   <nav>
-    <span class="nav-logo">🌸 Viva</span>
-    <a href="/entrar" class="nav-btn">Entrar</a>
+    <span class="nav-logo">Viva</span>
+    <div class="nav-right">
+      <a href="/entrar" class="nav-link">Entrar</a>
+      <a href="/cadastro" class="nav-cta">Começar grátis</a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <span class="hero-emoji">🌸</span>
-    <h1>Sua saúde na menopausa com inteligência artificial</h1>
-    <p>Apoio personalizado para controlar sintomas, melhorar sua alimentação e se sentir melhor todos os dias.</p>
-    <a href="/entrar" class="hero-cta">Começar 7 dias grátis →</a>
-    <a href="/entrar" class="hero-login">Já tenho conta. <span>Entrar</span></a>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      7 dias grátis · sem cartão obrigatório
+    </div>
+    <h1>A primeira IA criada para <em>mulheres na menopausa</em></h1>
+    <p class="hero-sub">Apoio personalizado, 24 horas por dia. Entenda seu corpo, controle seus sintomas e se sinta bem novamente.</p>
+    <div class="hero-actions">
+      <a href="/cadastro" class="btn-primary">
+        Começar agora — 7 dias grátis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="hero-note">Depois apenas <span>R$37/mês</span> · cancele quando quiser</p>
+    </div>
   </section>
 
-  <!-- BADGE -->
-  <div class="badge">✨ Milhares de mulheres já transformaram sua menopausa com o Viva</div>
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <p class="proof-text">Mulheres de todo o Brasil já transformaram sua menopausa com o Viva</p>
+  </div>
+
+  <!-- PROBLEM -->
+  <div class="problem">
+    <span class="section-label">Por que o Viva existe</span>
+    <h2>A menopausa não é o fim de nada. Mas ninguém te ensinou a atravessá-la.</h2>
+    <p>Fogachos às 3 da manhã. Humor que muda sem aviso. Um corpo que parece que você não conhece mais. E médicos com 10 minutos para te atender.<br><br>O Viva foi criado para preencher esse espaço — com inteligência, cuidado e total presença.</p>
+  </div>
+
+  <!-- SYMPTOMS -->
+  <div class="symptoms">
+    <span class="symptom-tag">Fogachos</span>
+    <span class="symptom-tag">Insônia</span>
+    <span class="symptom-tag">Ansiedade</span>
+    <span class="symptom-tag">Fadiga crônica</span>
+    <span class="symptom-tag">Alterações de humor</span>
+    <span class="symptom-tag">Baixa libido</span>
+    <span class="symptom-tag">Lapsos de memória</span>
+    <span class="symptom-tag">Pele seca</span>
+    <span class="symptom-tag">Dores no corpo</span>
+    <span class="symptom-tag">Ganho de peso</span>
+  </div>
 
   <!-- FEATURES -->
-  <div class="section">
-    <h2 class="section-title">Tudo que você precisa em um só lugar</h2>
-    <div class="features">
-      <div class="feature-card">
-        <span class="feature-emoji">🤖</span>
-        <h3>IA personalizada 24h</h3>
-        <p>Chat que entende seus sintomas e responde com base na sua fase da menopausa, com linguagem simples e acolhedora.</p>
+  <section class="features-section">
+    <div class="features-inner">
+      <div class="features-header">
+        <span class="section-label">O que você recebe</span>
+        <h2>Tudo que você precisa, em um lugar só</h2>
       </div>
-      <div class="feature-card">
-        <span class="feature-emoji">📊</span>
-        <h3>Controle de sintomas</h3>
-        <p>Registre fogachos, insônia, mudanças de humor e acompanhe sua evolução com gráficos claros.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-emoji">🥗</span>
-        <h3>Cardápio anti-inflamatório</h3>
-        <p>Receitas e dicas de alimentação criadas especificamente para aliviar os sintomas da menopausa.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-emoji">💆</span>
-        <h3>Rituais de bem-estar</h3>
-        <p>Rotinas diárias de autocuidado para dormir melhor, reduzir a ansiedade e melhorar sua energia.</p>
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-number">01</span>
+          <h3>IA por voz, disponível 24h</h3>
+          <p>Converse com a Viva como se fosse uma amiga que te entende. Ela ouve, responde com voz, e nunca te julga.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-number">02</span>
+          <h3>Relatório mensal personalizado</h3>
+          <p>Todo mês você recebe um resumo dos seus sintomas, humor e conquistas — com perguntas prontas para levar ao médico.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-number">03</span>
+          <h3>Comunidade de mulheres reais</h3>
+          <p>Um espaço seguro para compartilhar, ouvir e se sentir menos sozinha nessa fase. Sem julgamento.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-number">04</span>
+          <h3>Cardápio anti-inflamatório</h3>
+          <p>Alimentação pensada para aliviar fogachos, melhorar o sono e dar mais energia. Simples e adaptado à sua rotina.</p>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- TESTIMONIALS -->
-  <div class="testimonials">
-    <div class="testimonials-inner">
-      <h2 class="section-title">O que dizem nossas usuárias</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-text">"Finalmente encontrei um app que me entende. O chat da IA é incrível, responde tudo que eu precisava saber sobre meus sintomas."</p>
-          <span class="testimonial-name">— Ana Paula, 52 anos</span>
+  <section class="testimonials-section">
+    <div class="testimonials-header">
+      <span class="section-label">Depoimentos</span>
+      <h2>O que elas estão dizendo</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Finalmente me sinto compreendida. A Viva sabe exatamente o que estou passando e responde com uma calma que meu médico nunca teve."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Ana Paula</div>
+            <div class="testimonial-age">52 anos · São Paulo</div>
+          </div>
         </div>
-        <div class="testimonial-card">
-          <p class="testimonial-text">"Os fogachos reduziram muito depois que comecei a seguir o cardápio do Viva. Recomendo para todas as mulheres nessa fase!"</p>
-          <span class="testimonial-name">— Márcia S., 49 anos</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Os fogachos reduziram muito desde que comecei o cardápio do Viva. Parece bobagem, mas fez diferença real no meu dia a dia."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Márcia Santos</div>
+            <div class="testimonial-age">49 anos · Belo Horizonte</div>
+          </div>
         </div>
-        <div class="testimonial-card">
-          <p class="testimonial-text">"Me sinto menos sozinha. A comunidade do Viva é um espaço seguro para falar sobre o que ninguém costuma falar."</p>
-          <span class="testimonial-name">— Rosana F., 54 anos</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Chorei na primeira conversa com a Viva. Ela disse exatamente o que eu precisava ouvir. Me sinto menos sozinha nessa fase."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <div class="testimonial-name">Rosana Ferreira</div>
+            <div class="testimonial-age">54 anos · Rio de Janeiro</div>
+          </div>
         </div>
-        <div class="testimonial-card">
-          <p class="testimonial-text">"Dormi muito melhor depois dos rituais noturnos que o app sugeriu. Valeu cada centavo do investimento."</p>
-          <span class="testimonial-name">— Claudia M., 51 anos</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"O relatório mensal foi uma revelação. Eu nem sabia que meu humor tinha padrão — agora sei exatamente quando vai piorar e me preparo."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">C</div>
+          <div>
+            <div class="testimonial-name">Claudia Mendes</div>
+            <div class="testimonial-age">51 anos · Curitiba</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- PRICING -->
-  <div class="pricing">
-    <h2 class="section-title">Simples e acessível</h2>
-    <div class="price-card">
-      <span class="trial-badge">🎉 7 dias grátis</span>
-      <div class="price-value">R$37,90<span class="price-mes">/mês</span></div>
-      <p class="price-desc">Cancele quando quiser. Sem pegadinhas.</p>
-      <div class="price-features">
-        <div class="price-feature">✅ Chat com IA ilimitado</div>
-        <div class="price-feature">✅ Cardápio personalizado</div>
-        <div class="price-feature">✅ Controle de sintomas</div>
-        <div class="price-feature">✅ Rituais de bem-estar</div>
-        <div class="price-feature">✅ Comunidade exclusiva</div>
+  <section class="pricing-section">
+    <div class="pricing-inner">
+      <h2>Um investimento simples no seu bem-estar</h2>
+      <div class="price-card">
+        <span class="price-trial">7 dias grátis para experimentar</span>
+        <div class="price-amount">R$37<span class="price-period">/mês</span></div>
+        <p class="price-cancel">Cancele quando quiser. Sem burocracia.</p>
+        <div class="price-list">
+          <div class="price-list-item">
+            <span class="price-check">✓</span>
+            IA por voz ilimitada
+          </div>
+          <div class="price-list-item">
+            <span class="price-check">✓</span>
+            Relatório mensal personalizado
+          </div>
+          <div class="price-list-item">
+            <span class="price-check">✓</span>
+            Cardápio anti-inflamatório
+          </div>
+          <div class="price-list-item">
+            <span class="price-check">✓</span>
+            Comunidade exclusiva
+          </div>
+          <div class="price-list-item">
+            <span class="price-check">✓</span>
+            Perguntas prontas para o médico
+          </div>
+        </div>
+        <a href="/cadastro" class="btn-checkout">Começar meus 7 dias grátis</a>
       </div>
-      <a href="/entrar" class="cta-btn">Experimentar grátis agora</a>
     </div>
-  </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <h2>Você merece se sentir bem <em>agora</em></h2>
+    <p>Não na próxima consulta. Não quando os sintomas passarem. Agora.</p>
+    <a href="/cadastro" class="btn-primary">
+      Experimentar grátis por 7 dias
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">🌸 Viva</div>
-    <a href="mailto:suporte@appviva.com.br" class="footer-link">suporte@appviva.com.br</a>
-    <p class="footer-copy">© 2025 Viva App. Todos os direitos reservados.</p>
+    <div class="footer-logo">Viva</div>
+    <div class="footer-links">
+      <a href="/entrar">Entrar</a>
+      <a href="mailto:suporte@appviva.com.br">Suporte</a>
+    </div>
+    <p class="footer-copy">© 2026 Viva App · Todos os direitos reservados</p>
   </footer>
 
 </body>
