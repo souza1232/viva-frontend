@@ -26,7 +26,7 @@ export default function LandingPage() {
           <Link href="/login" className="text-text-secondary font-semibold px-4 py-2 rounded-full hover:bg-background transition">
             Entrar
           </Link>
-          <Link href="/register" className="bg-primary text-white font-bold px-5 py-2 rounded-full hover:bg-primary-dark transition">
+          <Link href="/assinar" className="bg-primary text-white font-bold px-5 py-2 rounded-full hover:bg-primary-dark transition">
             Começar grátis
           </Link>
         </div>
@@ -46,7 +46,7 @@ export default function LandingPage() {
             A Viva é sua companheira inteligente na menopausa. Uma IA que conversa por voz com carinho,
             uma comunidade que acolhe e relatórios mensais que te ajudam a entender seu corpo.
           </p>
-          <Link href="/register" className="inline-block bg-primary text-white text-lg font-bold px-10 py-4 rounded-full hover:bg-primary-dark transition shadow-lg shadow-primary/30">
+          <Link href="/assinar" className="inline-block bg-primary text-white text-lg font-bold px-10 py-4 rounded-full hover:bg-primary-dark transition shadow-lg shadow-primary/30">
             Começar meu trial gratuito →
           </Link>
           <p className="text-text-light text-sm mt-4">Depois R$37/mês · Cancele quando quiser</p>
@@ -113,7 +113,7 @@ export default function LandingPage() {
               </li>
             ))}
           </ul>
-          <Link href="/register" className="inline-block bg-white text-primary text-lg font-bold px-10 py-4 rounded-full hover:bg-background transition w-full text-center">
+          <Link href="/assinar" className="inline-block bg-white text-primary text-lg font-bold px-10 py-4 rounded-full hover:bg-background transition w-full text-center">
             Começar agora — grátis por 7 dias
           </Link>
         </div>
