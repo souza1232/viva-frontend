@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert,
   Linking, Platform, Animated,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 // expo-print e expo-sharing só funcionam em native (iOS/Android)
 const Print = Platform.OS !== 'web' ? require('expo-print') : null;
@@ -52,6 +53,7 @@ function InAppAlert({ message, onDismiss }) {
 
 export default function ProfileScreen() {
   const { user, logout } = useAuthStore();
+  const navigation = useNavigation();
   const [loadingCheckout, setLoadingCheckout] = useState(false);
   const [generatingPDF, setGeneratingPDF] = useState(false);
   const [alertMsg, setAlertMsg] = useState(null);
@@ -277,7 +279,7 @@ ${checkins.some(c => c.notes) ? `<h2>Observações</h2>${checkins.filter(c => c.
         <View style={styles.menuCard}>
           <MenuRow emoji="🔔" label="Notificações" onPress={() => showInfo('Notificações ativas 🔔', 'Você receberá lembretes às 9h e 21h todos os dias.')} />
           <MenuRow emoji="🔒" label="Privacidade" onPress={() => showInfo('Privacidade', 'Seus dados são 100% privados e nunca compartilhados com terceiros.')} />
-          <MenuRow emoji="💬" label="Suporte via WhatsApp" onPress={() => Linking.openURL('https://wa.me/5573998419275?text=Ol%C3%A1%21%20Preciso%20de%20ajuda%20com%20o%20app%20Viva.')} />
+          <MenuRow emoji="💬" label="Suporte" onPress={() => navigation.navigate('Support')} />
           <MenuRow emoji="⭐" label="Avaliar o app" onPress={() => showInfo('Obrigada! ⭐', 'Sua avaliação nos ajuda a melhorar cada vez mais.')} />
           <MenuRow emoji="🚪" label="Sair da conta" onPress={handleLogout} danger />
         </View>

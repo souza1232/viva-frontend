@@ -22,6 +22,7 @@ import ExerciseScreen from '../screens/ExerciseScreen';
 import SymptomTrackerScreen from '../screens/SymptomTrackerScreen';
 import EmergencyScreen from '../screens/EmergencyScreen';
 import PaywallScreen from '../screens/PaywallScreen';
+import SupportScreen from '../screens/SupportScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -90,6 +91,7 @@ export default function AppNavigator() {
             <Stack.Screen name="SymptomTracker" component={SymptomTrackerScreen} />
             <Stack.Screen name="Emergency" component={EmergencyScreen} />
             <Stack.Screen name="Paywall" component={PaywallScreen} />
+            <Stack.Screen name="Support" component={SupportScreen} />
           </>
         )}
       </Stack.Navigator>
