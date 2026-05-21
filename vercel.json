@@ -1,8 +1,8 @@
 {
-  "buildCommand": "cp -r public dist",
+  "buildCommand": "npx expo export --platform web",
   "outputDirectory": "dist",
   "framework": null,
-  "redirects": [
-    { "source": "/", "destination": "/inicio", "permanent": false }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
