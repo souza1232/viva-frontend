@@ -49,7 +49,7 @@ export default function LandingPage() {
           <Link href="/assinar" className="inline-block bg-primary text-white text-lg font-bold px-10 py-4 rounded-full hover:bg-primary-dark transition shadow-lg shadow-primary/30">
             Começar meu trial gratuito →
           </Link>
-          <p className="text-text-light text-sm mt-4">Depois R$37/mês · Cancele quando quiser</p>
+          <p className="text-text-light text-sm mt-4">Depois R$47/mês · Cancele quando quiser</p>
         </div>
       </section>
 
@@ -103,7 +103,7 @@ export default function LandingPage() {
       <section className="py-16 px-6" style={{ background: 'linear-gradient(135deg, #C96A8A 0%, #9D4A6A 100%)' }}>
         <div className="max-w-md mx-auto text-center text-white">
           <h2 className="text-3xl font-extrabold mb-4">Simples e justo</h2>
-          <div className="text-6xl font-extrabold mb-2">R$37</div>
+          <div className="text-6xl font-extrabold mb-2">R$47</div>
           <div className="text-white/80 mb-8">por mês · cancele quando quiser</div>
           <ul className="text-left space-y-3 mb-10">
             {['7 dias grátis para experimentar', 'IA por voz ilimitada', 'Acesso à comunidade', 'Relatório mensal personalizado', 'Suporte humanizado'].map(f => (

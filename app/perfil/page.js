@@ -104,7 +104,7 @@ export default function PerfilPage() {
           ) : isActive ? (
             <div>
               <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-bold mb-4 ${isTrialing ? 'bg-accent/20 text-accent' : 'bg-success/20 text-success'}`}>
-                {isTrialing ? '🎁 Trial ativo' : '✅ Ativa — R$37/mês'}
+                {isTrialing ? '🎁 Trial ativo' : '✅ Ativa — R$47/mês'}
               </div>
               {sub?.currentPeriodEnd && (
                 <p className="text-text-secondary text-sm mb-4">
@@ -129,7 +129,7 @@ export default function PerfilPage() {
                 disabled={checkoutLoading}
                 className="w-full bg-primary text-white font-bold py-3 rounded-full hover:bg-primary-dark transition disabled:opacity-60"
               >
-                {checkoutLoading ? 'Redirecionando...' : 'Assinar por R$37/mês'}
+                {checkoutLoading ? 'Redirecionando...' : 'Assinar por R$47/mês'}
               </button>
             </div>
           )}
