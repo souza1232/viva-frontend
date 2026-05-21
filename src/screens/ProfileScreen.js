@@ -7,7 +7,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 // expo-print e expo-sharing só funcionam em native (iOS/Android)
 const Print = Platform.OS !== 'web' ? require('expo-print') : null;
 const Sharing = Platform.OS !== 'web' ? require('expo-sharing') : null;
-import { createCheckout, createPortalSession, getCheckins } from '../services/api';
+import { createPortalSession, getCheckins } from '../services/api';
+
+const KIWIFY_URL = 'https://pay.kiwify.com.br/OKHSJyi';
 import useAuthStore from '../store/useAuthStore';
 import { COLORS, SPACING, RADIUS, SHADOW } from '../theme';
 
@@ -67,15 +69,10 @@ export default function ProfileScreen() {
   const firstName = user?.name?.split(' ')[0] || 'você';
 
   async function handleSubscribe() {
-    setLoadingCheckout(true);
-    try {
-      const { data } = await createCheckout();
-      await Linking.openURL(data.url);
-    } catch {
-      Alert.alert('Ops!', 'Erro ao abrir o checkout. Tente novamente.');
-    } finally {
-      setLoadingCheckout(false);
-    }
+    const url = user?.email
+      ? `${KIWIFY_URL}?email=${encodeURIComponent(user.email)}`
+      : KIWIFY_URL;
+    await Linking.openURL(url);
   }
 
   async function handleManageSubscription() {
