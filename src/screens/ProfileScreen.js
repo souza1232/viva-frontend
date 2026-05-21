@@ -236,7 +236,7 @@ ${checkins.some(c => c.notes) ? `<h2>Observações</h2>${checkins.filter(c => c.
               disabled={loadingCheckout}
             >
               <Text style={styles.subscribeBtnText}>
-                {loadingCheckout ? 'Aguarde...' : 'Assinar por R$37,90/mês'}
+                {loadingCheckout ? 'Aguarde...' : 'Assinar por R$47/mês'}
               </Text>
             </TouchableOpacity>
           )}

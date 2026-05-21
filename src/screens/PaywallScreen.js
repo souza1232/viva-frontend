@@ -4,7 +4,7 @@ import {
   ActivityIndicator, Linking, Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { createCheckout } from '../services/api';
+const KIWIFY_URL = 'https://pay.kiwify.com.br/OKHSJyi';
 
 const FEATURES = [
   { emoji: '🔮', text: 'Previsão do seu dia de trabalho baseada nos seus sintomas' },
@@ -21,17 +21,7 @@ export default function PaywallScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
 
   async function handleSubscribe() {
-    setLoading(true);
-    try {
-      const { data } = await createCheckout();
-      if (data?.url) {
-        await Linking.openURL(data.url);
-      }
-    } catch {
-      Alert.alert('Ops!', 'Não foi possível iniciar o pagamento. Tente novamente.');
-    } finally {
-      setLoading(false);
-    }
+    await Linking.openURL(KIWIFY_URL);
   }
 
   return (
@@ -66,7 +56,7 @@ export default function PaywallScreen({ navigation }) {
           <View style={styles.pricingHeader}>
             <Text style={styles.trialBadge}>7 DIAS GRÁTIS</Text>
           </View>
-          <Text style={styles.price}>R$37,90</Text>
+          <Text style={styles.price}>R$47</Text>
           <Text style={styles.pricePeriod}>por mês, após o período gratuito</Text>
           <Text style={styles.pricingDetail}>Cancele quando quiser. Sem surpresas.</Text>
         </View>

@@ -90,7 +90,7 @@ export default function RegisterScreen({ navigation }) {
             />
 
             <View style={styles.trialBanner}>
-              <Text style={styles.trialText}>🎉 Experimente grátis • R$37,90/mês • Cancele quando quiser</Text>
+              <Text style={styles.trialText}>🎉 Experimente grátis • R$47/mês • Cancele quando quiser</Text>
             </View>
 
             <TouchableOpacity
