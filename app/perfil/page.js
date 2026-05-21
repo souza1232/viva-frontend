@@ -1,7 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { createCheckout, cancelSubscription, getSubscriptionStatus } from '../../lib/api'
+import { cancelSubscription, getSubscriptionStatus } from '../../lib/api'
+
+const KIWIFY_URL = 'https://pay.kiwify.com.br/OKHSJyi'
 import { useAuth } from '../../lib/auth'
 import BottomNav from '../../components/BottomNav'
 
@@ -25,15 +27,11 @@ export default function PerfilPage() {
     }
   }, [user])
 
-  async function handleCheckout() {
-    setCheckoutLoading(true)
-    try {
-      const { data } = await createCheckout()
-      window.location.href = data.url
-    } catch {
-      alert('Erro ao redirecionar para pagamento.')
-      setCheckoutLoading(false)
-    }
+  function handleCheckout() {
+    const url = user?.email
+      ? `${KIWIFY_URL}?email=${encodeURIComponent(user.email)}`
+      : KIWIFY_URL
+    window.location.href = url
   }
 
   async function handleCancel() {

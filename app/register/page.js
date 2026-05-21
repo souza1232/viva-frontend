@@ -25,7 +25,8 @@ export default function RegisterPage() {
     try {
       const { data } = await register(name.trim(), email.trim().toLowerCase(), password)
       saveAuth(data.token, data.user)
-      router.push('/checkout')
+      const kiwifyUrl = `https://pay.kiwify.com.br/OKHSJyi?email=${encodeURIComponent(email.trim().toLowerCase())}`
+      window.location.href = kiwifyUrl
     } catch (err) {
       setError(err.response?.data?.error || 'Erro ao criar conta. Tente novamente.')
     } finally {
